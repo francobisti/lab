@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Forte — Menù</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2B28;
+    --cream:#F5F1E6;
+    --paper:#FBF8F0;
+    --forest:#3B5449;
+    --sage:#7FA695;
+    --teal:#3F97AE;
+    --gold:#B79A5D;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--forest); color:var(--cream); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:70vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:8vh 6vw;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(127,166,149,.25), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(183,154,93,.18), transparent 45%),
+      var(--paper);
+    border-bottom:1px solid rgba(43,43,40,.1);
+  }
+
+  .peaks{
+    display:flex;
+    justify-content:center;
+    margin-bottom:1.2rem;
+  }
+  .peaks svg{ width:120px; height:auto; }
+
+  .brand-name{
+    font-family:'Dancing Script', cursive;
+    font-weight:700;
+    font-size:clamp(3rem, 8vw, 4.6rem);
+    color:var(--ink);
+    line-height:1;
+  }
+  .brand-caption{
+    font-family:'Work Sans', sans-serif;
+    font-size:.72rem;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--forest);
+    margin-top:.5rem;
+  }
+
+  .menu-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 4rem);
+    letter-spacing:.05em;
+    margin-top:2.6rem;
+    color:var(--ink);
+  }
+
+  .hero-sub{
+    margin-top:1.2rem;
+    font-size:1rem;
+    color:var(--forest);
+    letter-spacing:.03em;
+  }
+
+  /* ---------- Sticky nav ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--forest);
+    padding:.85rem 4vw;
+    display:flex;
+    gap:.5rem;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{ display:none; }
+  nav a{
+    flex:0 0 auto;
+    font-family:'Work Sans', sans-serif;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--cream);
+    text-decoration:none;
+    padding:.5em 1.1em;
+    border-radius:100px;
+    border:1.4px solid rgba(245,241,230,.3);
+    white-space:nowrap;
+    transition:all .2s ease;
+  }
+  nav a:hover, nav a:focus-visible{
+    background:var(--cream);
+    color:var(--forest);
+    border-color:var(--cream);
+  }
+
+  .lang-switch{
+    display:flex;
+    gap:.3rem;
+    margin-left:auto;
+    flex:0 0 auto;
+  }
+  .lang-btn{
+    font-family:'Work Sans', sans-serif;
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    color:var(--cream);
+    background:transparent;
+    border:1.4px solid rgba(245,241,230,.3);
+    border-radius:100px;
+    padding:.45em .7em;
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  .lang-btn:hover{ border-color:rgba(245,241,230,.6); }
+  .lang-btn.active{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:var(--ink);
+  }
+
+  /* ---------- Sections ---------- */
+  section{ padding:5rem 6vw; }
+
+  .section-head{
+    max-width:820px;
+    margin:0 auto 2.2rem;
+    display:flex;
+    align-items:baseline;
+    gap:.6rem;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:clamp(1.9rem, 4.5vw, 2.6rem);
+    color:var(--ink);
+  }
+  .section-head .en{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.5rem, 3.5vw, 2rem);
+    color:var(--teal);
+  }
+
+  .card-wrap{
+    max-width:820px;
+    margin:0 auto;
+    background:var(--paper);
+    border:1px solid rgba(59,84,73,.18);
+    border-radius:6px;
+    padding:2.4rem clamp(1.3rem, 4vw, 3rem);
+  }
+
+  .dish{
+    padding:1.1rem 0;
+    border-bottom:1px solid rgba(43,43,40,.08);
+  }
+  .dish:last-child{ border-bottom:none; }
+
+  .dish-row{
+    display:flex;
+    align-items:baseline;
+    gap:.6rem;
+  }
+  .dish-name{
+    font-weight:600;
+    font-size:1.02rem;
+    flex:0 1 auto;
+  }
+  .dish-leader{
+    flex:1 1 auto;
+    border-bottom:1.4px dotted rgba(43,43,40,.28);
+    transform:translateY(-4px);
+    min-width:1rem;
+  }
+  .dish-price{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:1.15rem;
+    white-space:nowrap;
+    color:var(--forest);
+  }
+  .dish-price .note{
+    font-family:'Work Sans', sans-serif;
+    font-size:.7rem;
+    font-weight:500;
+    color:var(--ink);
+    opacity:.6;
+    margin-right:.4rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .dish-en{
+    color:var(--teal);
+    font-size:.88rem;
+    font-style:italic;
+    margin-top:.25rem;
+    line-height:1.45;
+    max-width:62ch;
+  }
+
+  .pizza-name{
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+
+  .subhead{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:1.3rem;
+    color:var(--forest);
+    margin:1.8rem 0 .6rem;
+    padding-top:1.2rem;
+    border-top:1.4px solid rgba(59,84,73,.25);
+  }
+  .subhead:first-child{ margin-top:0; padding-top:0; border-top:none; }
+
+  .allergen-note{
+    max-width:820px;
+    margin:2rem auto 0;
+    text-align:center;
+    font-size:.82rem;
+    color:var(--forest);
+    opacity:.75;
+    font-style:italic;
+  }
+
+  footer{
+    background:var(--forest);
+    color:var(--cream);
+    text-align:center;
+    padding:3.5rem 6vw;
+  }
+  footer .fname{
+    font-family:'Dancing Script', cursive;
+    font-weight:700;
+    font-size:2rem;
+    margin-bottom:.5rem;
+  }
+  footer p{ opacity:.75; font-size:.85rem; margin-top:.4rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="peaks">
+    <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2B2B28" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M10 80 L55 25 L80 55 L110 15 L150 60 L190 80"/>
+    </svg>
+  </div>
+  <div class="brand-name">Al Forte</div>
+  <div class="brand-caption">Dolomites Bar &amp; Restaurant</div>
+  <div class="menu-title">Menù</div>
+  <p class="hero-sub">Madonna di Campiglio</p>
+</header>
+
+<nav aria-label="Naviga il menu">
+  <a href="#antipasti" data-i18n data-en="Starters" data-de="Vorspeisen" data-pl="Przystawki">Antipasti</a>
+  <a href="#primi" data-i18n data-en="Pasta" data-de="Erste Gänge" data-pl="Pierwsze dania">Primi</a>
+  <a href="#secondi" data-i18n data-en="Mains" data-de="Hauptgänge" data-pl="Drugie dania">Secondi</a>
+  <a href="#insalatone" data-i18n data-en="Salads" data-de="Salate" data-pl="Sałatki">Insalatone</a>
+  <a href="#contorni" data-i18n data-en="Sides" data-de="Beilagen" data-pl="Dodatki">Contorni</a>
+  <a href="#bambini" data-i18n data-en="Kids" data-de="Kinder" data-pl="Dzieci">Bambini</a>
+  <a href="#dolci" data-i18n data-en="Desserts" data-de="Desserts" data-pl="Desery">Dolci</a>
+  <a href="#pizze">Pizze</a>
+  <div class="lang-switch" role="group" aria-label="Lingua / Language">
+    <button class="lang-btn active" data-lang="it">IT</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="de">DE</button>
+    <button class="lang-btn" data-lang="pl">PL</button>
+  </div>
+</nav>
+
+<!-- ANTIPASTI -->
+<section id="antipasti">
+  <div class="section-head"><h2>Antipasti</h2><span class="en" data-i18n data-en="Starters" data-de="Vorspeisen" data-pl="Przystawki">Starters</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Antipasto all'italiana con salumi, formaggi nostrani, burratina, mostarde</span><span class="dish-leader"></span><span class="dish-price">25,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Selection of Italian cured meats, local cheeses, burrata and artisanal preserves, served on a sharing board" data-de="Auswahl italienischer Wurstwaren, einheimischer Käse, Burrata und hausgemachter Konfitüren, zum Teilen serviert" data-pl="Wybór włoskich wędlin, lokalnych serów, burraty i domowych konfitur, podawane na wspólnym talerzu">Selection of Italian cured meats, local cheeses, burrata and artisanal preserves, served on a sharing board</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">La nostra bufala servita con scarola riccia, pomodorini gialli e rossi, anacardi e acciughe</span><span class="dish-leader"></span><span class="dish-price">22,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Buffalo mozzarella served with curly endive, yellow and red cherry tomatoes, cashews and anchovies" data-de="Büffelmozzarella mit krauser Endivie, gelben und roten Kirschtomaten, Cashewkernen und Sardellen" data-pl="Mozzarella z bawolego mleka podana z kędzierzawą endywią, żółtymi i czerwonymi pomidorkami koktajlowymi, orzechami nerkowca i anchois">Buffalo mozzarella served with curly endive, yellow and red cherry tomatoes, cashews and anchovies</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Uovo "perfetto" cotto a bassa temperatura, servito con fonduta di Casolet, scaglie di tartufo del Baldo su crumble di taralli</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Slow-cooked egg served on Casolet cheese fondue with shaved truffle and tarallo crumble" data-de="Bei Niedrigtemperatur gegartes Ei auf Casolet-Käsefondue mit gehobeltem Trüffel und Tarallo-Crumble" data-pl="Jajko gotowane w niskiej temperaturze podane na fondue z sera Casolet z płatkami trufli i kruszonką z tarallo">Slow-cooked egg served on Casolet cheese fondue with shaved truffle and tarallo crumble</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Carpaccio di carne salada con crostini, stracciatella di bufala e pomodorini confit</span><span class="dish-leader"></span><span class="dish-price">20,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="House-cured Carne Salada carpaccio served with crispy croutons, buffalo stracciatella and confit cherry tomatoes" data-de="Hausgesalzenes Carne-Salada-Carpaccio mit knusprigen Croutons, Büffel-Stracciatella und confierten Kirschtomaten" data-pl="Carpaccio z domowo peklowanej wołowiny Carne Salada z chrupiącymi grzankami, stracciatellą z bawolego mleka i confitowanymi pomidorkami">House-cured Carne Salada carpaccio served with crispy croutons, buffalo stracciatella and confit cherry tomatoes</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Tagliata di tonno, cavolo rosso e semi di sesamo</span><span class="dish-leader"></span><span class="dish-price">25,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Seared tuna with red cabbage and sesame seeds" data-de="Angebratener Thunfisch mit Rotkohl und Sesamsamen" data-pl="Podsmażany tuńczyk z czerwoną kapustą i nasionami sezamu">Seared tuna with red cabbage and sesame seeds</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">La nostra Tartare di Manzetta con rosso d'uovo e petali di tartufo</span><span class="dish-leader"></span><span class="dish-price">23,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Beef tartare with egg yolk and shaved truffle" data-de="Rindertatar mit Eigelb und gehobeltem Trüffel" data-pl="Tatar wołowy z żółtkiem jaja i płatkami trufli">Beef tartare with egg yolk and shaved truffle</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRIMI -->
+<section id="primi">
+  <div class="section-head"><h2>Primi Piatti</h2><span class="en" data-i18n data-en="Pasta, Gnocchi, Soup and Rice" data-de="Pasta, Gnocchi, Suppe und Reis" data-pl="Makaron, gnocchi, zupa i ryż">Pasta, Gnocchi, Soup and Rice</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Tagliolini agli agrumi, battuta di gambero rosso mediterraneo e spuma leggera di burrata pugliese</span><span class="dish-leader"></span><span class="dish-price">22,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Tagliolini with citrus fruits, Mediterranean red prawn tartare and light Apulian burrata foam" data-de="Tagliolini mit Zitrusfrüchten, mediterranem Tatar von roten Garnelen und leichtem Burrata-Schaum aus Apulien" data-pl="Tagliolini z owocami cytrusowymi, tatarem ze śródziemnomorskich czerwonych krewetek i lekką pianką z burraty z Apulii">Tagliolini with citrus fruits, Mediterranean red prawn tartare and light Apulian burrata foam</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Tagliatelle ai funghi porcini e salsiccia nostrana</span><span class="dish-leader"></span><span class="dish-price">20,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Tagliatelle with porcini mushrooms and local sausage" data-de="Tagliatelle mit Steinpilzen und einheimischer Wurst" data-pl="Tagliatelle z borowikami i lokalną kiełbasą">Tagliatelle with porcini mushrooms and local sausage</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Pappardelle trafilate al bronzo con ragù di cervo</span><span class="dish-leader"></span><span class="dish-price">22,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Bronze-drawn pappardelle with venison ragù" data-de="Bronzegezogene Pappardelle mit Hirschragout" data-pl="Pappardelle ciągnione przez brąz z ragout z jelenia">Bronze-drawn pappardelle with venison ragù</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Canederli in brodo o al burro fuso</span><span class="dish-leader"></span><span class="dish-price">16,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Traditional bread dumplings served in broth or with melted butter" data-de="Traditionelle Semmelknödel in Brühe oder mit zerlassener Butter" data-pl="Tradycyjne knedle chlebowe podawane w bulionie lub z roztopionym masłem">Traditional bread dumplings served in broth or with melted butter</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Strangolapreti di spinaci con burro fuso, salvia e Trentingrana</span><span class="dish-leader"></span><span class="dish-price">16,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Traditional spinach strangolapreti with melted butter, sage and Trentingrana cheese" data-de="Traditionelle Spinat-Strangolapreti mit zerlassener Butter, Salbei und Trentingrana-Käse" data-pl="Tradycyjne szpinakowe strangolapreti z roztopionym masłem, szałwią i serem Trentingrana">Traditional spinach strangolapreti with melted butter, sage and Trentingrana cheese</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Spaghetti alla crudaiola con stracciatella, pomodorini, rucola e origano</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Spaghetti alla Crudaiola with stracciatella, cherry tomatoes, rocket and oregano" data-de="Spaghetti alla Crudaiola mit Stracciatella, Kirschtomaten, Rucola und Oregano" data-pl="Spaghetti alla Crudaiola ze stracciatellą, pomidorkami koktajlowymi, rukolą i oregano">Spaghetti alla Crudaiola with stracciatella, cherry tomatoes, rocket and oregano</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Risotto mantecato al Taleggio DOP, ciliegie marinate al Franciacorta Ca' del Bosco e loro riduzione</span><span class="dish-leader"></span><span class="dish-price">22,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Creamy Taleggio DOP risotto with Franciacorta-marinated cherries and Franciacorta reduction" data-de="Cremiges Taleggio-DOP-Risotto mit in Franciacorta marinierten Kirschen und Franciacorta-Reduktion" data-pl="Kremowe risotto z serem Taleggio DOP z wiśniami marynowanymi w winie Franciacorta i redukcją z Franciacorta">Creamy Taleggio DOP risotto with Franciacorta-marinated cherries and Franciacorta reduction</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Paccheri di Gragnano al ragù di polpo del Mediterraneo, capperi di Pantelleria, olive taggiasche e ristretto di pomodoro</span><span class="dish-leader"></span><span class="dish-price">25,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Gragnano paccheri with Mediterranean octopus ragù, Pantelleria capers, Taggiasca olives and tomato reduction" data-de="Paccheri aus Gragnano mit mediterranem Oktopus-Ragout, Kapern aus Pantelleria, Taggiasca-Oliven und Tomatenreduktion" data-pl="Paccheri z Gragnano z ragout ze śródziemnomorskiej ośmiornicy, kaparami z Pantellerii, oliwkami Taggiasca i redukcją pomidorową">Gragnano paccheri with Mediterranean octopus ragù, Pantelleria capers, Taggiasca olives and tomato reduction</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Zuppa del giorno</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Soup of the day" data-de="Suppe des Tages" data-pl="Zupa dnia">Soup of the day</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECONDI -->
+<section id="secondi">
+  <div class="section-head"><h2>Secondi Piatti</h2><span class="en" data-i18n data-en="Meat &amp; Fish dishes" data-de="Fleisch- &amp; Fischgerichte" data-pl="Dania mięsne i rybne">Meat &amp; Fish dishes</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Chateaubriand ai ferri 350 gr. a persona con fantasia di verdure alla griglia e rösti di patate <em style="opacity:.6; font-style:normal; font-size:.85em">(min. 2 persone)</em></span><span class="dish-leader"></span><span class="dish-price"><span class="note">a persona</span>42,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="350 g grilled Chateaubriand per person, served with grilled vegetables and potato rösti (minimum 2 guests)" data-de="350 g gegrilltes Chateaubriand pro Person, serviert mit gegrilltem Gemüse und Kartoffel-Rösti (mindestens 2 Personen)" data-pl="350 g grillowanego Chateaubriand na osobę, podawane z grillowanymi warzywami i plackami ziemniaczanymi rösti (minimum 2 osoby)">350 g grilled Chateaubriand per person, served with grilled vegetables and potato rösti (minimum 2 guests)</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Filetto di manzo ai ferri o in salsa al pepe rosa</span><span class="dish-leader"></span><span class="dish-price">35,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Beef fillet served grilled or with pink peppercorn sauce" data-de="Rinderfilet gegrillt oder mit rosa Pfeffersauce" data-pl="Polędwica wołowa grillowana lub w sosie z różowego pieprzu">Beef fillet served grilled or with pink peppercorn sauce</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Polpo cotto a bassa temperatura su crema di patate</span><span class="dish-leader"></span><span class="dish-price">25,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Slow-cooked octopus served on creamy potato purée" data-de="Bei Niedrigtemperatur gegarter Oktopus auf cremigem Kartoffelpüree" data-pl="Ośmiornica gotowana w niskiej temperaturze podana na kremowym purée ziemniaczanym">Slow-cooked octopus served on creamy potato purée</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Bocconcini di manzo in salmì con polenta di Storo</span><span class="dish-leader"></span><span class="dish-price">23,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Beef stew in traditional salmì sauce served with Storo polenta" data-de="Rindergulasch in traditioneller Salmì-Sauce mit Storo-Polenta" data-pl="Gulasz wołowy w tradycyjnym sosie salmì podawany z polentą Storo">Beef stew in traditional salmì sauce served with Storo polenta</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Filetto di cervo scottato, riduzione di mirtilli rossi alpini e croccanti di polenta di Storo</span><span class="dish-leader"></span><span class="dish-price">28,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Seared venison fillet with Alpine cranberry reduction and crispy Storo polenta" data-de="Angebratenes Hirschfilet mit alpiner Preiselbeer-Reduktion und knuspriger Storo-Polenta" data-pl="Podsmażany filet z jelenia z redukcją z alpejskiej żurawiny i chrupiącą polentą Storo">Seared venison fillet with Alpine cranberry reduction and crispy Storo polenta</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Tagliata di Bavetta su puntarelle di cicoria all'olio</span><span class="dish-leader"></span><span class="dish-price">30,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Flank steak served with puntarelle dressed in extra virgin olive oil" data-de="Bavette-Steak mit Puntarelle, angemacht mit nativem Olivenöl extra" data-pl="Stek z łaty wołowej podawany z puntarelle skropionymi oliwą z oliwek extra vergine">Flank steak served with puntarelle dressed in extra virgin olive oil</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Rösti di patate con speck maturato 18 mesi e uova all'occhio di bue</span><span class="dish-leader"></span><span class="dish-price">22,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Potato rösti topped with 18-month-aged speck and a fried egg" data-de="Kartoffel-Rösti mit 18 Monate gereiftem Speck und Spiegelei" data-pl="Placek ziemniaczany rösti z 18-miesięcznym dojrzewanym speckiem i jajkiem sadzonym">Potato rösti topped with 18-month-aged speck and a fried egg</p>
+    </div>
+  </div>
+</section>
+
+<!-- INSALATONE -->
+<section id="insalatone">
+  <div class="section-head"><h2>Insalatone</h2><span class="en" data-i18n data-en="Salads" data-de="Salate" data-pl="Sałatki">Salads</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Trentina: soncino, insalata trentina, radicchio rosso, casolet, mele e noci</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Trentina: mixed salad leaves with red radicchio, Casolet cheese, apples and walnuts" data-de="Trentina: gemischte Salatblätter mit rotem Radicchio, Casolet-Käse, Äpfeln und Walnüssen" data-pl="Trentina: mieszane liście sałaty z czerwonym radicchio, serem Casolet, jabłkami i orzechami włoskimi">Trentina: mixed salad leaves with red radicchio, Casolet cheese, apples and walnuts</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Fortini: valeriana trentina, mais, ceci, pomodoro, tonno, uovo sodo, ciliegine di mozzarella e olive nere</span><span class="dish-leader"></span><span class="dish-price">19,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Fortini: mixed salad leaves with sweetcorn, chickpeas, tomatoes, tuna, hard-boiled egg, mozzarella pearls and black olives" data-de="Fortini: gemischte Salatblätter mit Mais, Kichererbsen, Tomaten, Thunfisch, hartgekochtem Ei, Mozzarella-Perlen und schwarzen Oliven" data-pl="Fortini: mieszane liście sałaty z kukurydzą, ciecierzycą, pomidorami, tuńczykiem, jajkiem na twardo, perełkami mozzarelli i czarnymi oliwkami">Fortini: mixed salad leaves with sweetcorn, chickpeas, tomatoes, tuna, hard-boiled egg, mozzarella pearls and black olives</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Caesar Salad: soncino, insalata trentina, carote, cavolo rosso, salsa caesar, pollo, cubetti di formaggio nostrano</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Caesar Salad with chicken, carrots, red cabbage and local cheese cubes" data-de="Caesar Salad mit Hähnchen, Karotten, Rotkohl und Würfeln von einheimischem Käse" data-pl="Sałatka Cezar z kurczakiem, marchewką, czerwoną kapustą i kostkami lokalnego sera">Caesar Salad with chicken, carrots, red cabbage and local cheese cubes</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Fresh: insalata, cavolo cappuccio, finocchio, carote, arancia rossa, ananas, melograno</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Fresh: mixed salad, white cabbage, fennel, carrots, red orange, pineapple, pomegranate" data-de="Fresh: gemischter Salat, Weißkohl, Fenchel, Karotten, Blutorange, Ananas, Granatapfel" data-pl="Fresh: mieszana sałata, biała kapusta, koper włoski, marchewka, czerwona pomarańcza, ananas, granat">Fresh: mixed salad, white cabbage, fennel, carrots, red orange, pineapple, pomegranate</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTORNI -->
+<section id="contorni">
+  <div class="section-head"><h2>Contorni</h2><span class="en" data-i18n data-en="Side dishes" data-de="Beilagen" data-pl="Dodatki">Side dishes</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Polenta soffice di Storo</span><span class="dish-leader"></span><span class="dish-price">6,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Soft polenta from Storo" data-de="Weiche Polenta aus Storo" data-pl="Miękka polenta ze Storo">Soft polenta from Storo</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Patate fritte</span><span class="dish-leader"></span><span class="dish-price">6,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="French fries" data-de="Pommes frites" data-pl="Frytki">French fries</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Insalata mista</span><span class="dish-leader"></span><span class="dish-price">6,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Mixed salad" data-de="Gemischter Salat" data-pl="Sałatka mieszana">Mixed salad</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Cavolo cappuccio bianco condito con semi di cumino</span><span class="dish-leader"></span><span class="dish-price">6,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Seasoned white cabbage with cumin seeds" data-de="Gewürzter Weißkohl mit Kümmelsamen" data-pl="Doprawiana biała kapusta z nasionami kminku">Seasoned white cabbage with cumin seeds</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Puntarelle saltate</span><span class="dish-leader"></span><span class="dish-price">6,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Sautéed puntarelle" data-de="Sautierte Puntarelle" data-pl="Duszona puntarelle">Sautéed puntarelle</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Contorno del giorno</span><span class="dish-leader"></span><span class="dish-price">6,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Side dish of the day" data-de="Beilage des Tages" data-pl="Dodatek dnia">Side dish of the day</p>
+    </div>
+  </div>
+</section>
+
+<!-- BAMBINI -->
+<section id="bambini">
+  <div class="section-head"><h2>Menù bambini</h2><span class="en" data-i18n data-en="Kids menù" data-de="Kindermenü" data-pl="Menu dla dzieci">Kids menù</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Pasta al pomodoro</span><span class="dish-leader"></span><span class="dish-price">11,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pasta with tomato sauce" data-de="Pasta mit Tomatensauce" data-pl="Makaron w sosie pomidorowym">Pasta with tomato sauce</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Pasta al ragù o al pesto</span><span class="dish-leader"></span><span class="dish-price">12,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pasta with ragù Bolognese or pesto" data-de="Pasta mit Ragù Bolognese oder Pesto" data-pl="Makaron z ragù bolognese lub pesto">Pasta with ragù Bolognese or pesto</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Cotoletta alla milanese con patatine fritte</span><span class="dish-leader"></span><span class="dish-price">14,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Breaded schnitzel with French fries" data-de="Paniertes Schnitzel mit Pommes frites" data-pl="Panierowany kotlet z frytkami">Breaded schnitzel with French fries</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Chicken nuggets con patatine fritte</span><span class="dish-leader"></span><span class="dish-price">14,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Chicken nuggets with French fries" data-de="Chicken Nuggets mit Pommes frites" data-pl="Nuggetsy z kurczaka z frytkami">Chicken nuggets with French fries</p>
+    </div>
+    <div class="subhead" style="margin-top:1.4rem;"></div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Coperto</span><span class="dish-leader"></span><span class="dish-price">2,50 €</span></div>
+      <p class="dish-en" data-i18n data-en="Cover charge per person" data-de="Gedeck pro Person" data-pl="Opłata za nakrycie na osobę">Cover charge per person</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOLCI -->
+<section id="dolci">
+  <div class="section-head"><h2>Dolci</h2><span class="en" data-i18n data-en="Desserts" data-de="Desserts" data-pl="Desery">Desserts</span></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Panna cotta con topping al caramello / cioccolato / frutti di bosco</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Panna cotta with caramel / chocolate / forest fruit topping" data-de="Panna Cotta mit Karamell- / Schokoladen- / Waldfrüchte-Topping" data-pl="Panna cotta z polewą karmelową / czekoladową / owoców leśnych">Panna cotta with caramel / chocolate / forest fruit topping</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Tiramisù</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Tiramisù" data-de="Tiramisù" data-pl="Tiramisù">Tiramisù</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Torta Linzer</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Linzer tart" data-de="Linzer Torte" data-pl="Tarta Linzer">Linzer tart</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Strudel di mele</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Apple strudel" data-de="Apfelstrudel" data-pl="Strudel jabłkowy">Apple strudel</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Torta Sacher</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Sacher Cake (chocolate with apricot jam filling)" data-de="Sachertorte (Schokolade mit Marillenmarmelade-Füllung)" data-pl="Tort Sacher (czekolada z nadzieniem z konfitury morelowej)">Sacher Cake (chocolate with apricot jam filling)</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Torta di carote</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Carrot cake" data-de="Karottenkuchen" data-pl="Ciasto marchewkowe">Carrot cake</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Crostata alla marmellata</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Italian jam tart" data-de="Italienische Marmeladentorte" data-pl="Włoska tarta z konfiturą">Italian jam tart</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Crostata alla nutella e nocciole</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Nutella and hazelnut tart" data-de="Nutella- und Haselnusstorte" data-pl="Tarta z nutellą i orzechami laskowymi">Nutella and hazelnut tart</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Crema al caffè</span><span class="dish-leader"></span><span class="dish-price">4,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Coffee cream" data-de="Kaffeecreme" data-pl="Krem kawowy">Coffee cream</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Crema catalana</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Crème brûlée" data-de="Crème brûlée" data-pl="Crème brûlée">Crème brûlée</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="dish-name">Cremoso al caramello salato con granella al cioccolato</span><span class="dish-leader"></span><span class="dish-price">8,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Salted caramel cream with chocolate crumble" data-de="Gesalzene Karamellcreme mit Schokoladen-Crumble" data-pl="Krem z solonym karmelem z czekoladową kruszonką">Salted caramel cream with chocolate crumble</p>
+    </div>
+  </div>
+</section>
+
+<!-- PIZZE -->
+<section id="pizze">
+  <div class="section-head"><h2>Pizze</h2></div>
+  <div class="card-wrap">
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Fornarina</span><span class="dish-leader"></span><span class="dish-price">5,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Olio, sale e rosmarino — Oil, salt and rosemary" data-de="Olivenöl, Salz und Rosmarin" data-pl="Oliwa, sól i rozmaryn">Olio, sale e rosmarino — Oil, salt and rosemary</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Margherita</span><span class="dish-leader"></span><span class="dish-price">9,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella — Tomato, mozzarella cheese" data-de="Tomate, Mozzarella" data-pl="Pomidor, mozzarella">Pomodoro, mozzarella — Tomato, mozzarella cheese</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">4 Formaggi</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, scamorza, gorgonzola, grana e ricotta — Tomato, mozzarella, scamorza, gorgonzola, parmesan and ricotta cheeses" data-de="Tomate, Mozzarella, Scamorza, Gorgonzola, Parmesan und Ricotta" data-pl="Pomidor, mozzarella, scamorza, gorgonzola, parmezan i ricotta">Pomodoro, mozzarella, scamorza, gorgonzola, grana e ricotta — Tomato, mozzarella, scamorza, gorgonzola, parmesan and ricotta cheeses</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Amatriciana</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, cipolla, bacon e peperoncino — Tomato, mozzarella cheese, onions, bacon and chilli" data-de="Tomate, Mozzarella, Zwiebeln, Speck und Chili" data-pl="Pomidor, mozzarella, cebula, bekon i chili">Pomodoro, mozzarella, cipolla, bacon e peperoncino — Tomato, mozzarella cheese, onions, bacon and chilli</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">4 Stagioni</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi e olive nere — Tomato, mozzarella cheese, cooked ham, mushrooms, artichokes and olives" data-de="Tomate, Mozzarella, gekochter Schinken, Pilze, Artischocken und Oliven" data-pl="Pomidor, mozzarella, szynka gotowana, pieczarki, karczochy i oliwki">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi e olive nere — Tomato, mozzarella cheese, cooked ham, mushrooms, artichokes and olives</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Boscaiola</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, salsiccia, speck e funghi — Tomato, mozzarella cheese, sausage, speck and mushrooms" data-de="Tomate, Mozzarella, Wurst, Speck und Pilze" data-pl="Pomidor, mozzarella, kiełbasa, speck i pieczarki">Pomodoro, mozzarella, salsiccia, speck e funghi — Tomato, mozzarella cheese, sausage, speck and mushrooms</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Bufalina</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, bufala, pomodorini, rucola e basilico — Tomato, mozzarella cheese, buffalo mozzarella cheese, cherry tomatoes and rocket" data-de="Tomate, Mozzarella, Büffelmozzarella, Kirschtomaten und Rucola" data-pl="Pomidor, mozzarella, mozzarella z bawolego mleka, pomidorki koktajlowe i rukola">Pomodoro, mozzarella, bufala, pomodorini, rucola e basilico — Tomato, mozzarella cheese, buffalo mozzarella cheese, cherry tomatoes and rocket</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Braccio di Ferro</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, spinaci, ricotta e grana grattugiato — Tomato, mozzarella cheese, spinach, ricotta cheese and grated parmesan" data-de="Tomate, Mozzarella, Spinat, Ricotta und geriebener Parmesan" data-pl="Pomidor, mozzarella, szpinak, ricotta i tarty parmezan">Pomodoro, mozzarella, spinaci, ricotta e grana grattugiato — Tomato, mozzarella cheese, spinach, ricotta cheese and grated parmesan</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Calzone</span><span class="dish-leader"></span><span class="dish-price">15,50 €</span></div>
+      <p class="dish-en" data-i18n data-en="Mozzarella, prosciutto cotto, funghi, ricotta — Mozzarella cheese, cooked ham, mushrooms and ricotta cheese" data-de="Mozzarella, gekochter Schinken, Pilze und Ricotta" data-pl="Mozzarella, szynka gotowana, pieczarki i ricotta">Mozzarella, prosciutto cotto, funghi, ricotta — Mozzarella cheese, cooked ham, mushrooms and ricotta cheese</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Calabrese</span><span class="dish-leader"></span><span class="dish-price">9,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Mozzarella, aglio e peperoncino — Mozzarella cheese, garlic and chilli" data-de="Mozzarella, Knoblauch und Chili" data-pl="Mozzarella, czosnek i chili">Mozzarella, aglio e peperoncino — Mozzarella cheese, garlic and chilli</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Gorgonzola e Speck</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, gorgonzola e speck — Tomato, mozzarella cheese, gorgonzola cheese and speck" data-de="Tomate, Mozzarella, Gorgonzola und Speck" data-pl="Pomidor, mozzarella, gorgonzola i speck">Pomodoro, mozzarella, gorgonzola e speck — Tomato, mozzarella cheese, gorgonzola cheese and speck</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Gustosa</span><span class="dish-leader"></span><span class="dish-price">19,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, crudo di Parma, rucola, burrata, pomodorini e basilico — Tomato, mozzarella cheese, Parma ham, rocket, burrata cheese, cherry tomatoes and basil" data-de="Tomate, Mozzarella, Parmaschinken, Rucola, Burrata, Kirschtomaten und Basilikum" data-pl="Pomidor, mozzarella, szynka parmeńska, rukola, burrata, pomidorki koktajlowe i bazylia">Pomodoro, mozzarella, crudo di Parma, rucola, burrata, pomodorini e basilico — Tomato, mozzarella cheese, Parma ham, rocket, burrata cheese, cherry tomatoes and basil</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Capricciosa</span><span class="dish-leader"></span><span class="dish-price">14,50 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi — Tomato, mozzarella cheese, cooked ham, mushrooms, artichokes" data-de="Tomate, Mozzarella, gekochter Schinken, Pilze, Artischocken" data-pl="Pomidor, mozzarella, szynka gotowana, pieczarki, karczochy">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi — Tomato, mozzarella cheese, cooked ham, mushrooms, artichokes</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Montanara</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, salsiccia e porcini — Tomato, mozzarella cheese, sausage and mushrooms" data-de="Tomate, Mozzarella, Wurst und Pilze" data-pl="Pomidor, mozzarella, kiełbasa i pieczarki">Pomodoro, mozzarella, salsiccia e porcini — Tomato, mozzarella cheese, sausage and mushrooms</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Romana</span><span class="dish-leader"></span><span class="dish-price">14,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, capperi, acciughe, olive, origano — Tomato, mozzarella cheese, capers, anchovies, olives, oregano" data-de="Tomate, Mozzarella, Kapern, Sardellen, Oliven, Oregano" data-pl="Pomidor, mozzarella, kapary, anchois, oliwki, oregano">Pomodoro, mozzarella, capperi, acciughe, olive, origano — Tomato, mozzarella cheese, capers, anchovies, olives, oregano</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Schiacciata Mediterranea</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Rucola, pomodorini, bufala e basilico — Rocket salad, cherry tomatoes, buffalo mozzarella cheese, basil" data-de="Rucola, Kirschtomaten, Büffelmozzarella, Basilikum" data-pl="Rukola, pomidorki koktajlowe, mozzarella z bawolego mleka, bazylia">Rucola, pomodorini, bufala e basilico — Rocket salad, cherry tomatoes, buffalo mozzarella cheese, basil</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Speck e Mascarpone</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, speck e mascarpone — Tomato, mozzarella cheese, speck and mascarpone cheese" data-de="Tomate, Mozzarella, Speck und Mascarpone" data-pl="Pomidor, mozzarella, speck i mascarpone">Pomodoro, mozzarella, speck e mascarpone — Tomato, mozzarella cheese, speck and mascarpone cheese</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Tirolese</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, würstel e speck — Tomato, mozzarella cheese, würstel and speck" data-de="Tomate, Mozzarella, Würstel und Speck" data-pl="Pomidor, mozzarella, parówka i speck">Pomodoro, mozzarella, würstel e speck — Tomato, mozzarella cheese, würstel and speck</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Tonno e Cipolla</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, tonno e cipolla — Tomato, mozzarella cheese, tuna and onion" data-de="Tomate, Mozzarella, Thunfisch und Zwiebel" data-pl="Pomidor, mozzarella, tuńczyk i cebula">Pomodoro, mozzarella, tonno e cipolla — Tomato, mozzarella cheese, tuna and onion</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Trevisana</span><span class="dish-leader"></span><span class="dish-price">14,50 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, radicchio, salame piccante e grana grattugiato — Tomato, mozzarella cheese, radish, spicy salami and parmesan" data-de="Tomate, Mozzarella, Radicchio, scharfe Salami und Parmesan" data-pl="Pomidor, mozzarella, radicchio, ostre salami i parmezan">Pomodoro, mozzarella, radicchio, salame piccante e grana grattugiato — Tomato, mozzarella cheese, radish, spicy salami and parmesan</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Vegetariana</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, melanzane, zucchine, peperoni, spinaci e grana — Tomato, mozzarella cheese, aubergines, courgettes, peppers, spinach and parmesan" data-de="Tomate, Mozzarella, Auberginen, Zucchini, Paprika, Spinat und Parmesan" data-pl="Pomidor, mozzarella, bakłażan, cukinia, papryka, szpinak i parmezan">Pomodoro, mozzarella, melanzane, zucchine, peperoni, spinaci e grana — Tomato, mozzarella cheese, aubergines, courgettes, peppers, spinach and parmesan</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Pistacchiosa</span><span class="dish-leader"></span><span class="dish-price">19,50 €</span></div>
+      <p class="dish-en" data-i18n data-en="Mozzarella, mortadella, burrata, pistacchio, salsa pistacchio e granella — Mozzarella cheese, mortadella, burrata, pistachio, pistachio sauce, pistachio grain" data-de="Mozzarella, Mortadella, Burrata, Pistazie, Pistaziensauce, Pistazienstückchen" data-pl="Mozzarella, mortadela, burrata, pistacje, sos pistacjowy, kawałki pistacji">Mozzarella, mortadella, burrata, pistacchio, salsa pistacchio e granella — Mozzarella cheese, mortadella, burrata, pistachio, pistachio sauce, pistachio grain</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Valtellina</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, bresaola, grana e rucola — Tomato, mozzarella cheese, bresaola, grana cheese and rocket salad" data-de="Tomate, Mozzarella, Bresaola, Grana-Käse und Rucola" data-pl="Pomidor, mozzarella, bresaola, ser grana i rukola">Pomodoro, mozzarella, bresaola, grana e rucola — Tomato, mozzarella cheese, bresaola, grana cheese and rocket salad</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Lab</span><span class="dish-leader"></span><span class="dish-price">18,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, acciughe, burrata, pomodori secchi, basilico fresco — Tomato, anchovies, burrata cheese, sun-dried tomatoes, fresh basil" data-de="Tomate, Sardellen, Burrata, getrocknete Tomaten, frischer Basilikum" data-pl="Pomidor, anchois, burrata, suszone pomidory, świeża bazylia">Pomodoro, acciughe, burrata, pomodori secchi, basilico fresco — Tomato, anchovies, burrata cheese, sun-dried tomatoes, fresh basil</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Trentina</span><span class="dish-leader"></span><span class="dish-price">15,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, salsiccia, gorgonzola e grana grattugiato — Tomato, mozzarella cheese, sausage, gorgonzola cheese and grated parmesan" data-de="Tomate, Mozzarella, Wurst, Gorgonzola und geriebener Parmesan" data-pl="Pomidor, mozzarella, kiełbasa, gorgonzola i tarty parmezan">Pomodoro, mozzarella, salsiccia, gorgonzola e grana grattugiato — Tomato, mozzarella cheese, sausage, gorgonzola cheese and grated parmesan</p>
+    </div>
+    <div class="dish">
+      <div class="dish-row"><span class="pizza-name">Fortini</span><span class="dish-leader"></span><span class="dish-price">16,00 €</span></div>
+      <p class="dish-en" data-i18n data-en="Pomodoro, mozzarella, salamino, aglio, bufala e basilico — Tomato, mozzarella cheese, salami, garlic, buffalo mozzarella and basil" data-de="Tomate, Mozzarella, Salami, Knoblauch, Büffelmozzarella und Basilikum" data-pl="Pomidor, mozzarella, salami, czosnek, mozzarella z bawolego mleka i bazylia">Pomodoro, mozzarella, salamino, aglio, bufala e basilico — Tomato, mozzarella cheese, salami, garlic, buffalo mozzarella and basil</p>
+    </div>
+  </div>
+  <p class="allergen-note" data-i18n
+    data-en="For allergen and intolerance information, our staff is happy to help."
+    data-de="Für Informationen zu Allergenen und Unverträglichkeiten steht Ihnen unser Personal gerne zur Verfügung."
+    data-pl="Informacji o alergenach i nietolerancjach udziela chętnie nasz personel.">Per informazioni su allergeni e intolleranze, il nostro staff è a disposizione.</p>
+</section>
+
+<footer>
+  <div class="fname">Al Forte</div>
+  <p>Dolomites Bar &amp; Restaurant · Madonna di Campiglio</p>
+  <p data-i18n
+    data-en="Menu subject to seasonal changes"
+    data-de="Speisekarte kann saisonal variieren"
+    data-pl="Menu może się zmieniać sezonowo">Menu soggetto a variazioni stagionali</p>
+  <p style="margin-top:1.6rem; opacity:.6; font-size:.78rem;" data-i18n
+    data-en='Same family as <a href="https://www.instagram.com/lab_apres_ski/" target="_blank" rel="noopener" style="color:#FFD93D; text-decoration:underline;">LAB Après-Ski</a>'
+    data-de='Gleiche Familie wie <a href="https://www.instagram.com/lab_apres_ski/" target="_blank" rel="noopener" style="color:#FFD93D; text-decoration:underline;">LAB Après-Ski</a>'
+    data-pl='Ta sama rodzina co <a href="https://www.instagram.com/lab_apres_ski/" target="_blank" rel="noopener" style="color:#FFD93D; text-decoration:underline;">LAB Après-Ski</a>'>Stessa famiglia di
+    <a href="https://www.instagram.com/lab_apres_ski/" target="_blank" rel="noopener" style="color:#FFD93D; text-decoration:underline;">LAB Après-Ski</a>
+  </p>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('[data-i18n]');
+    els.forEach(function(el){
+      if(!el.dataset.it){ el.dataset.it = el.innerHTML; }
+    });
+
+    function setLang(lang){
+      els.forEach(function(el){
+        if(el.classList.contains('dish-en')){
+          if(lang === 'it'){
+            el.style.display = 'none';
+          } else {
+            el.style.display = '';
+            var val = el.dataset[lang];
+            if(val !== undefined){ el.innerHTML = val; }
+          }
+          return;
+        }
+        var val = lang === 'it' ? el.dataset.it : el.dataset[lang];
+        if(val !== undefined){ el.innerHTML = val; }
+      });
+      document.querySelectorAll('.lang-btn').forEach(function(b){
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+      document.documentElement.lang = lang;
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ setLang(btn.dataset.lang); });
+    });
+  })();
+</script>
+
+</body>
+</html>
